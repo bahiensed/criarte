@@ -7,7 +7,10 @@ import {
   Typography
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import DadosPessoais from '@/components/pacientes/DadosPessoais';
 import DadosFamiliares from '@/components/pacientes/DadosFamiliares';
+import DadosEscolares from '@/components/pacientes/DadosEscolares';
+import DadosFinanceiros from '@/components/pacientes/DadosFinanceiros';
 
 const Profissionais = () => {
   return (
@@ -23,10 +26,7 @@ const Profissionais = () => {
         </h2>
       </AccordionSummary>
       <AccordionDetails>
-        <Typography>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          malesuada lacus ex, sit amet blandit leo lobortis eget.
-        </Typography>
+        <DadosPessoais />
       </AccordionDetails>
     </Accordion>
 
@@ -56,10 +56,22 @@ const Profissionais = () => {
         </h2>
       </AccordionSummary>
       <AccordionDetails sx={{maxHeight: '32rem', overflow: 'auto'}}>
-        <Typography>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          malesuada lacus ex, sit amet blandit leo lobortis eget.
-        </Typography>
+        <DadosEscolares />
+      </AccordionDetails>
+    </Accordion>
+
+    <Accordion>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="panel2-content"
+        id="panel2-header"
+      >
+        <h2 style={{marginBottom: 0,}}>
+          Dados Financeiros
+        </h2>
+      </AccordionSummary>
+      <AccordionDetails sx={{maxHeight: '32rem', overflow: 'auto'}}>
+        <DadosFinanceiros />
       </AccordionDetails>
     </Accordion>
 
