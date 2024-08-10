@@ -32,3 +32,16 @@ export const genero = [
   {i:0, v: 'feminino'},
   {i:1, v: 'masculino'},
 ]
+
+export const responsaveis = [
+  {i: 0, v: 'Mãe'},
+  {i: 1, v: 'Pai'},
+  {i: 2, v: 'Outro'},
+]
+
+// this is a normal comment
+// * this is an important comment
+// ! this is an alert
+// ? this is a question
+//// nobody cares
+//TODO: 
