@@ -33,6 +33,15 @@ const DadosPessoais = () => {
       <Divider sx={{my: '2rem ',}}/>
 
       <Grid container spacing={2}>
+
+        <Grid xs={12} md={6}>
+          <TextField id='telefone1' label="Telefone de Contato" fullWidth variant="outlined" />
+        </Grid>
+
+        <Grid xs={12} md={6}>
+          <TextField id='telefone2' label="Outro Telefone" fullWidth variant="outlined" />
+        </Grid>
+
         <Grid xs={12} md={10}>
           <TextField id='enderecoPaciente' label="Endereço atual do paciente" fullWidth variant="outlined" />
         </Grid>

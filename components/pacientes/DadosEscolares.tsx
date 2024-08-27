@@ -29,6 +29,34 @@ const DadosEscolares = () => {
           <TextField id='serie' label="Ano / Série" fullWidth variant="outlined" />
         </Grid>
 
+        <Grid xs={12} md={10}>
+          <TextField id='EscolaEndereco' label="Endereço da Escola" fullWidth variant="outlined" />
+        </Grid>
+
+        <Grid xs={12} md={2}>
+          <TextField id='EscolaNumero' label="Número" fullWidth variant="outlined" />
+        </Grid>
+
+        <Grid xs={12} md={6}>
+          <TextField id='EscolaComplemento' label="Complemento" fullWidth variant="outlined" />
+        </Grid>
+
+        <Grid xs={12} md={6}>
+          <TextField id='EscolaBairro' label="Bairro" fullWidth variant="outlined" />
+        </Grid>
+
+        <Grid xs={12} md={6}>
+          <TextField id='EscolaCidade' label="Cidade" fullWidth variant="outlined" />
+        </Grid>
+
+        <Grid xs={12} md={2}>
+          <TextField id='EscolaUF' label="Estado" fullWidth variant="outlined" />
+        </Grid>
+
+        <Grid xs={12} md={4}>
+          <TextField id='EscolaTelefone' label="Telefone da Escola" fullWidth variant="outlined" />
+        </Grid>
+
         <Grid xs={12} md={6}>
           <TextField id='coordenadora' label="Nome da Coordenadora Pedagógica" fullWidth variant="outlined" />
         </Grid>

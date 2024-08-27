@@ -1,3 +1,9 @@
+export const dependencia = [
+  {value: 'Dependente'},
+  {value: 'Semi-independente'},
+  {value: 'Independente'},
+]
+
 export const escolaridades = [
   {i: 0, content: 'Analfabeta'},
   {i: 1, content: 'Fundamental Incompleto'},
@@ -38,10 +44,3 @@ export const responsaveis = [
   {i: 1, v: 'Pai'},
   {i: 2, v: 'Outro'},
 ]
-
-// this is a normal comment
-// * this is an important comment
-// ! this is an alert
-// ? this is a question
-//// nobody cares
-//TODO: 
