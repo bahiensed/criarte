@@ -3,12 +3,11 @@ import { Button, Checkbox, Divider, FormControl, FormControlLabel, InputLabel, M
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
 import { responsaveis } from '@/constants';
 
-
 const DadosFinanceiros = () => {
   const [responsavelFinanceiro, setResponsavelFinanceiro] = React.useState('');
   const handleChange = (event: SelectChangeEvent) => {
     setResponsavelFinanceiro(event.target.value as string);
-  };  
+  };
 
   const [isResponsavelFinanceiroChecked, setIsResponsavelFinanceiroChecked] = useState(false);
   const handleResponsavelFinanceiroChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,19 +21,44 @@ const DadosFinanceiros = () => {
           <FormControl fullWidth>
             <InputLabel id="responsavelFinanceiro">Responsável Financeiro</InputLabel>
             <Select
+              labelId="responsavelFinanceiro-label"
               id="responsavelFinanceiro"
               value={responsavelFinanceiro}
               label="Responsável Financeiro"
               onChange={handleChange}
             >
               {responsaveis.map((responsavel) => (
-                <MenuItem key={responsavel.i} value={responsavel.i}>
-                  {responsavel.v}
+                <MenuItem key={responsavel.value} value={responsavel.value}>
+                  {responsavel.value}
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
         </Grid>
+
+        {responsavelFinanceiro === 'Outro' && (
+        <>
+        <Grid xs={12}>
+          <TextField id='financeiro-nome' label="Nome completo do responsável financeiro" fullWidth variant="outlined" />
+        </Grid>
+        
+        <Grid xs={12} md={6}>
+          <TextField id='financeiro-cpf' label="CPF do responsável financeiro" fullWidth variant="outlined" />
+        </Grid>
+
+        <Grid xs={12} md={6}>
+          <TextField id="financeiro-identidade" label="Carteira de identidade do responsável financeiro" placeholder="Número da carteira de identidade do responsável" fullWidth variant="outlined" />
+        </Grid>
+
+        <Grid xs={12} md={6}>
+          <TextField id="financeiro-telefone" label="Telefone de contato do responsável financeiro" placeholder="Telefone de contato do responsável financeiro" fullWidth variant="outlined" />
+        </Grid>
+
+        <Grid xs={12} md={6}>
+          <TextField id='financeiro-email' label="E-mail do responsável financeiro" fullWidth variant="outlined" />
+        </Grid>
+        </>
+        )}
       </Grid>
 
       <Grid container spacing={2}>
@@ -78,9 +102,7 @@ const DadosFinanceiros = () => {
 
       </Grid>
 
-
       <Divider sx={{my: '2rem ',}}/>
-
 
       <Grid container spacing={2}>
         <Grid xs={6} md={6}>
@@ -97,12 +119,8 @@ const DadosFinanceiros = () => {
           <Typography variant='caption' display={'block'}>Rafael em 18/08/24</Typography>
         </Grid>
       </Grid>
-
     </>
   )
 }
 
-export default DadosFinanceiros
-
-
-
+export default DadosFinanceiros;

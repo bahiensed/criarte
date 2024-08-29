@@ -34,7 +34,7 @@ function DateOfBirthAndAge() {
       <Grid xs={8} md={4}>
         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'pt-br'}>
           <DatePicker
-            label="Data de Nascimento"
+            label="Data de nascimento"
             value={dateOfBirth}
             onChange={(newValue) => {
               if (newValue && newValue.isValid() && newValue.year() >= 1901) {

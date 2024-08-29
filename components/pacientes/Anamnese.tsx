@@ -5,12 +5,31 @@ import { dependencia } from '@/constants';
 import DateOfBirthAndAge from '../DateOfBirthAndAge'
 
 const Anamnese = () => {
-  const [isReforcoEscolarChecked, setIsReforcoEscolarChecked] = useState(false);
-  const [isExtraCurricularChecked, setIsExtracurricularChecked] = useState(false);
+  const [isDiagnosticoChecked, setIsDiagnosticoChecked] = useState(false);
+  const handleDiagnosticoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsDiagnosticoChecked(event.target.checked);
+  };
 
+  const [isEpisodioMarcanteChecked, setIsEpisodioMarcanteChecked] = useState(false);
+  const handleEpisodioMarcanteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsEpisodioMarcanteChecked(event.target.checked);
+  };
+
+  const [isExtraCurricularChecked, setIsExtracurricularChecked] = useState(false);
   const handleExtraCurricularChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsExtracurricularChecked(event.target.checked);
   };
+
+  const [isReforcoEscolarChecked, setIsReforcoEscolarChecked] = useState(false);
+  const handleReforcoEscolarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsReforcoEscolarChecked(event.target.checked);
+  };
+  
+  const [isTratamentoChecked, setIsTratamentoChecked] = useState(false);
+  const handleTratamentoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsTratamentoChecked(event.target.checked);
+  };
+
 
   const [sociabilidade, setChange] = React.useState('');
 
@@ -33,21 +52,34 @@ const Anamnese = () => {
       <Divider sx={{mb: '1rem',}}/>
 
       <Grid container spacing={2}>
+        <Grid xs={12} md={6}>
+          <TextField id='quem-indicou' label="Quem indicou a clínica?" fullWidth variant="outlined" />
+        </Grid>
+
+        <Grid xs={12} md={6}>
+          <TextField id='quem-trouxe' label="Quem trouxe o paciente hoje?" fullWidth variant="outlined" />
+        </Grid>
+
         <Grid xs={12}>
-          &nbsp;<FormControlLabel
-            control={<Checkbox checked={isExtraCurricularChecked} onChange={handleExtraCurricularChange} />}
+          <FormControlLabel
+            control={<Checkbox checked={isDiagnosticoChecked} onChange={handleDiagnosticoChange} />}
             label="Possui diagnóstico clínico?"
           />
-          {isExtraCurricularChecked && (
-            <>
+        </Grid>
+
+        {isDiagnosticoChecked && (
+          <>
+            <Grid xs={12}>
               <TextField
-                id="diagnosticos"
-                label="Diagnósticos"
+                id="diagnostico"
+                label="Diagnóstico"
                 fullWidth
                 multiline
                 rows={3}
               />
+            </Grid>
 
+            <Grid xs={12}>
               <TextField
                 id="reacao"
                 label="Qual foi a reação da família frente ao diagnóstico?"
@@ -55,38 +87,38 @@ const Anamnese = () => {
                 multiline
                 rows={3}
               />
+            </Grid>
 
-              <Typography>
-                Médicos Responsáveis:
-              </Typography>
+            <Grid xs={12} md={4}>
+              <TextField id='medico-nome' label="Nome do Médico" fullWidth required variant="outlined" />
+            </Grid>
 
-              <Grid xs={12} md={4}>
-                <TextField id='MedicoNome' label="Nome do Médico" fullWidth required variant="outlined" />
-              </Grid>
+            <Grid xs={12} md={4}>
+              <TextField id='medico-especialidade' label="Especialidade do Médico" fullWidth variant="outlined" />
+            </Grid>
 
-              <Grid xs={12} md={4}>
-                <TextField id='MedicoEspecialidade' label="Especialidade do Médico" fullWidth variant="outlined" />
-              </Grid>
+            <Grid xs={12} md={4}>
+              <TextField id='medico-telefone' label="Telefone do Médico" fullWidth variant="outlined" />
+            </Grid>
 
-              <Grid xs={12} md={4}>
-                <TextField id='MedicoTelefone' label="Telefone do Médico" fullWidth variant="outlined" />
-              </Grid>
-
-              <Typography>
-                Medicamentos:
-              </Typography>
-
-              <Grid xs={12} md={4}>
-                <TextField id='Medicamento' label="Medicamento" fullWidth variant="outlined" />
-              </Grid>
-
-              <Grid xs={12} md={4}>
-                <TextField id='MedicamentoHorarios' label="Horários" fullWidth variant="outlined" />
-              </Grid>
-
-            </>
-          )}
-        </Grid>
+            <Grid xs={12}>
+              <FormControlLabel
+                control={<Checkbox checked={isReforcoEscolarChecked} onChange={handleReforcoEscolarChange} />}
+                label="O paciente faz uso de algum medicamento?"
+              />
+              {isReforcoEscolarChecked && (
+                <TextField
+                  id="medicamentos-lista"
+                  label="Lista de medicamentos e horários?"
+                  placeholder="Quais os medicamentos e em quais horários eles são utilizados?"
+                  fullWidth
+                  multiline
+                  rows={3}
+                />
+              )}
+            </Grid>
+          </>
+        )}
       </Grid>
 
       <h3 style={{
@@ -126,8 +158,8 @@ const Anamnese = () => {
 
         <Grid xs={12}>
           <TextField
-            id="Gestacao"
-            label="Como foi a Gestação?"
+            id="gestacao"
+            label="Como foi a gestação?"
             fullWidth
             multiline
             placeholder="Cuidados pré-natais, doenças, sintomas, alimentação, transfusão, tombo, alimentação, etc."
@@ -135,6 +167,48 @@ const Anamnese = () => {
           />
         </Grid>
 
+        <Grid xs={12}>
+          <TextField
+            id="emocional"
+            label="Aspectos emocionais da mãe"
+            fullWidth
+            multiline
+            placeholder="Como foram os aspectos e as condições emocionais da mãe durante a gestação?"
+            rows={3}
+          />
+        </Grid>
+
+        <Grid xs={12}>
+          <FormControlLabel
+            control={<Checkbox checked={isTratamentoChecked} onChange={handleTratamentoChange} />}
+            label="A mãe necessitou de algum tratamento durante a gestação?"
+          />
+          {isTratamentoChecked && (
+            <TextField
+              id="gestacao-tratamento"
+              label="Tratamentos durante a gestação"
+              placeholder="Quais tratamentos a mãe necessitou durante a gestação?"
+              fullWidth
+              multiline
+              rows={3}
+            />
+          )}
+
+          <FormControlLabel
+            control={<Checkbox checked={isEpisodioMarcanteChecked} onChange={handleEpisodioMarcanteChange} />}
+            label="Algum episódio marcante durante a gestação?"
+          />
+          {isEpisodioMarcanteChecked && (
+            <TextField
+              id="episodio-marcante"
+              label="Algum episódio marcante durante a gestação?"
+              placeholder="Algum episódio marcante durante a gestação?"
+              fullWidth
+              multiline
+              rows={3}
+            />
+          )}
+        </Grid>
 
 
         <Grid xs={12}>
@@ -636,6 +710,189 @@ const Anamnese = () => {
           <FormControlLabel control={<Checkbox />} label="Acorda e vai para a cama dos pais?" /><br />
         </Grid>
       </Grid>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <h3 style={{
+        color: '#444',
+        marginBottom: 0,
+        marginTop: '3rem',
+        paddingBottom: 0
+        }}
+      >
+        Desenvolvimento e Evolução Psicomotora
+      </h3>
+      <Divider sx={{mb: '1rem',}}/>
+
+      <Grid container spacing={2}>
+
+
+        <Grid xs={12}>
+          <FormControlLabel control={<Checkbox />} label="O paciente ficou no cercadinho?" /><br />    
+
+          <FormControlLabel
+            control={<Checkbox checked={isExtraCurricularChecked} onChange={handleExtraCurricularChange} />}
+            label="O paciente engatinhou?"
+          /><br />
+          {isExtraCurricularChecked && (
+            <TextField id="engatinhou"
+              label="Quando o paciente começou a engatinhar?"
+              placeholder="Quando o paciente começou a engatinhar?"
+              fullWidth
+            />
+          )}
+
+          <FormControlLabel control={<Checkbox />} label="Mostrava-se corajoso ao explorar, ENGATINHANDO, um novo espaço?" /><br />    
+        </Grid>
+
+        <Grid xs={12} md={6}>
+          <TextField
+            id=""
+            label="Com que idade começou a andar?"
+            fullWidth
+          />
+        </Grid>
+
+        <Grid xs={12} md={6}>
+          <TextField
+            id=""
+            label="Quem ensinou a andar?"
+            fullWidth
+          />
+        </Grid>
+
+        <Grid xs={12}>
+          <FormControlLabel control={<Checkbox />} label="Mostrava-se corajoso ao explorar, ANDANDO, um novo espaço?" /><br />    
+          <FormControlLabel control={<Checkbox />} label="Ou era inseguro ao andar?" /><br />
+          <TextField
+            id="atitude-ao-andar"
+            label="E hoje? Anda com segurança ou demonstra insegurança?"
+            fullWidth
+          />
+        </Grid>
+
+
+        <Grid xs={12} md={6}>
+          <TextField
+            id="movimentos-finos"
+            label="Como evoluiu a coordenação dos MOVIMENTOS FINOS?"
+            fullWidth
+          />
+        </Grid>
+
+        <Grid xs={12} md={6}>
+          <TextField
+            id="coordenacao-grossa"
+            label="E os MOVIMENTOS DE COORDENAÇÃO GROSSA?"
+            fullWidth
+          />
+        </Grid>
+
+
+        <Grid xs={12}>
+          <FormControlLabel
+            control={<Checkbox checked={isExtraCurricularChecked} onChange={handleExtraCurricularChange} />}
+            label="O paciente é lento para realizar alguma tarefa?"
+          /><br />
+          {isExtraCurricularChecked && (
+            <TextField id="tarefa-lenta"
+              label="Quais tarefas o paciente é lento para realizar?"
+              placeholder="Quais tarefas o paciente é lento para realizar?"
+              fullWidth
+            />
+          )}
+        </Grid>
+
+        <Grid xs={12}>
+          <FormControlLabel control={<Checkbox />} label="Toma banho sozinho?" /><br />
+          <FormControlLabel control={<Checkbox />} label="Veste-se sozinho?" /><br />
+          <FormControlLabel control={<Checkbox />} label="Calça-se sozinho?" /><br />
+          <FormControlLabel control={<Checkbox />} label="Sabe dar nó nos calçados?" /><br />
+          <FormControlLabel control={<Checkbox />} label="É desastrado?" /><br />
+          <FormControlLabel control={<Checkbox />} label="É destro?" /><br />
+          <FormControlLabel control={<Checkbox />} label="É canhoto?" /><br />
+          <FormControlLabel control={<Checkbox />} label="Rói as unhas?" /><br />
+          <FormControlLabel control={<Checkbox />} label="Chupa o dedo ou fica com a mão na boca?" /><br />
+
+          <FormControlLabel
+            control={<Checkbox checked={isExtraCurricularChecked} onChange={handleExtraCurricularChange} />}
+            label="Tem alguma mania ou 'tic'?"
+          /><br />
+          {isExtraCurricularChecked && (
+            <TextField id="manias"
+              label="Qual mania ou 'tic' o paciente apresenta?"
+              placeholder="Qual mania ou 'tic' o paciente apresenta?"
+              fullWidth
+            />
+          )}
+
+          <FormControlLabel
+            control={<Checkbox checked={isExtraCurricularChecked} onChange={handleExtraCurricularChange} />}
+            label="Precisa de ajuda para fazer alguma coisa?"
+          /><br />
+          {isExtraCurricularChecked && (
+            <TextField id="ajuda"
+              label="Precisa de ajuda em quê?"
+              placeholder="Precisa de ajuda em quê??"
+              fullWidth
+            />
+          )}
+
+          <FormControlLabel
+            control={<Checkbox checked={isExtraCurricularChecked} onChange={handleExtraCurricularChange} />}
+            label="Pratica esportes?"
+          /><br />
+          {isExtraCurricularChecked && (
+            <TextField id="pratica-esportes"
+              label="Quais esportes o paciente pratica?"
+              placeholder="Quais esportes o paciente pratica?"
+              fullWidth
+            />
+          )}
+        </Grid>
+
+        <Grid xs={12}>
+          <TextField
+              id="observacoes-psicomotoras"
+              label="Observações"
+              fullWidth
+              multiline
+              rows={3}
+            />
+        </Grid>
+
+
+
+      </Grid>
+
 
 
 

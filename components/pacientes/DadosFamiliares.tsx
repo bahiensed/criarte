@@ -1,9 +1,5 @@
 import React from 'react';
 import 'dayjs/locale/pt-br';
-import { AdapterDayjs } from  '@mui/x-date-pickers/AdapterDayjs';
-import { DatePicker } from    '@mui/x-date-pickers/DatePicker';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { Autocomplete, Button, Checkbox, Divider, FormControl, FormControlLabel, IconButton, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
 import DateOfBirtheAndAge from '@/components/DateOfBirthAndAge';
@@ -12,49 +8,58 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function Date() {
-  const [age, setAge] = React.useState('');
+  const [escolaridade, setEscolaridade] = React.useState('');
+  const handleEscolaridadeChange = (event: SelectChangeEvent) => {
+    setEscolaridade(event.target.value as string);
+  };
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
-  };  
+  const [genero, setGenero] = React.useState('');
+  const handleGeneroChange = (event: SelectChangeEvent) => {
+    setGenero(event.target.value as string);
+  };
+
+  const [idade, setIdade] = React.useState('');
+  const handleIdadeChange = (event: SelectChangeEvent) => {
+    setIdade(event.target.value as string);
+  };
 
   return (
     <>
       <Grid container spacing={2}>
         <Grid xs={12} md={6}>
-          <TextField id='nomeCompletoMae' label="Nome Completo da Mãe" fullWidth variant="outlined" />
+          <TextField id='mae-nome' label="Nome completo da mãe" fullWidth variant="outlined" />
         </Grid>
 
         <DateOfBirtheAndAge />
         
         <Grid xs={12} md={6}>
-          <TextField id='cpfMae' label="CPF" fullWidth variant="outlined" />
+          <TextField id='mae-cpf' label="CPF da mãe" fullWidth variant="outlined" />
         </Grid>
 
         <Grid xs={12} md={6}>
-          <TextField id='idMae' label="Carteira de Identidade" fullWidth variant="outlined" />
+          <TextField id="mae-identidade" label="Carteira de identidade da mãe" placeholder="Número da carteira de identidade da mãe" fullWidth variant="outlined" />
         </Grid>
 
         <Grid xs={12} md={6}>
-          <TextField id='telefoneMae' label="Telefone de Contato" fullWidth variant="outlined" />
+          <TextField id="mae-telefone" label="Telefone de contato da mãe" placeholder="Telefone de contato da mãe" fullWidth variant="outlined" />
         </Grid>
 
         <Grid xs={12} md={6}>
-          <TextField id='emailMae' label="e-mail" fullWidth variant="outlined" />
+          <TextField id='mae-email' label="E-mail da mãe" fullWidth variant="outlined" />
         </Grid>
 
         <Grid xs={12} md={6}>
           <FormControl fullWidth>
-            <InputLabel id="escolaridadeMae">Escolaridade</InputLabel>
+            <InputLabel id="mae-escolaridade">Escolaridade da Mãe</InputLabel>
             <Select
-              id="escolaridadeMae"
-              value={age}
-              label="Escolaridade"
-              onChange={handleChange}
+              id="mae-escolaridade"
+              value={escolaridade}
+              label="Escolaridade da Mãe"
+              onChange={handleEscolaridadeChange}
             >
               {escolaridades.map((escolaridade) => (
-                <MenuItem key={escolaridade.i} value={escolaridade.i}>
-                  {escolaridade.content}
+                <MenuItem key={escolaridade.value} value={escolaridade.value}>
+                  {escolaridade.value}
                 </MenuItem>
               ))}
             </Select>
@@ -62,65 +67,47 @@ export default function Date() {
         </Grid>
 
         <Grid xs={12} md={6}>
-          <TextField id='profissaoMae' label="Profissão" fullWidth variant="outlined" />
+          <TextField id='mae-profissao' label="Profissão da Mãe " fullWidth variant="outlined" />
         </Grid>
       </Grid>
 
-
       <Divider sx={{my: '2rem ',}}/>
-
 
       <Grid container spacing={2}>
         <Grid xs={12} md={6}>
-          <TextField id='nomePai' label="Nome Completo do Pai" fullWidth variant="outlined" />
+          <TextField id='pai-nome' label="Nome completo do pai" fullWidth variant="outlined" />
         </Grid>
 
-        <Grid xs={8} md={4}>
-          <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'pt-br'}>
-            <DemoContainer components={['DatePicker']} sx={{pt:0}}>
-                <DatePicker
-                  label="Data de Nascimento do Pai"
-                  slots={{
-                    textField: (params) => <TextField {...params} fullWidth />,
-                  }}
-                />
-            </DemoContainer>
-          </LocalizationProvider>
-        </Grid>
+        <DateOfBirtheAndAge />
 
-        <Grid xs={4} md={2}>
-          <TextField id='idadePai' label='Idade' value='0' variant='outlined' disabled fullWidth />
+        <Grid xs={12} md={6}>
+          <TextField id='pai-cpf' label="CPF do pai" fullWidth variant="outlined" />
         </Grid>
 
         <Grid xs={12} md={6}>
-          <TextField id='telPai' label="Telefone de Contato" fullWidth variant="outlined" />
+          <TextField id="pai-identidade" label="Carteira de identidade do pai" placeholder="Número da carteira de identidade do pai" fullWidth variant="outlined" />
         </Grid>
 
         <Grid xs={12} md={6}>
-          <TextField id='emailPai' label="e-mail" fullWidth variant="outlined" />
+          <TextField id="pai-telefone" label="Telefone de contato do pai" placeholder="Telefone de contato do pai" fullWidth variant="outlined" />
         </Grid>
 
         <Grid xs={12} md={6}>
-          <TextField id='idPai' label="Carteira de Identidade" fullWidth variant="outlined" />
-        </Grid>
-
-        <Grid xs={12} md={6}>
-          <TextField id='cpfPai' label="CPF" fullWidth variant="outlined" />
+          <TextField id='pai-email' label="E-mail do pai" fullWidth variant="outlined" />
         </Grid>
 
         <Grid xs={12} md={6}>
           <FormControl fullWidth>
-            <InputLabel>Escolaridade</InputLabel>
+            <InputLabel id="pai-escolaridade">Escolaridade do pai</InputLabel>
             <Select
-              labelId="demo-simple-select-label"
-              id="escolaridadePai"
-              value={age}
-              label="Escolaridade"
-              onChange={handleChange}
+              id="pai-escolaridade"
+              value={escolaridade}
+              label="Escolaridade do pai"
+              onChange={handleEscolaridadeChange}
             >
               {escolaridades.map((escolaridade) => (
-                <MenuItem key={escolaridade.i} value={escolaridade.i}>
-                  {escolaridade.content}
+                <MenuItem key={escolaridade.value} value={escolaridade.value}>
+                  {escolaridade.value}
                 </MenuItem>
               ))}
             </Select>
@@ -128,35 +115,18 @@ export default function Date() {
         </Grid>
 
         <Grid xs={12} md={6}>
-          <TextField id='profissaoPai' label="Profissão" fullWidth variant="outlined" />
+          <TextField id='pai-profissao' label="Profissão do pai " fullWidth variant="outlined" />
         </Grid>
       </Grid>
 
-
       <Divider sx={{my: '2rem ',}}/>
-
 
       <Grid container spacing={2}>
         <Grid xs={12} md={6}>
-          <TextField id='nomeIrmao' label="Nome do Irmão" fullWidth variant="outlined" />
+          <TextField id='irmao-nome' label="Nome do irmão" fullWidth variant="outlined" />
         </Grid>
 
-        <Grid xs={8} md={4}>
-          <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'pt-br'}>
-            <DemoContainer components={['DatePicker']} sx={{pt:0}}>
-                <DatePicker
-                  label="Data de Nascimento do Irmão"
-                  slots={{
-                    textField: (params) => <TextField {...params} fullWidth />,
-                  }}
-                />
-            </DemoContainer>
-          </LocalizationProvider>
-        </Grid>
-
-        <Grid xs={4} md={2}>
-          <TextField id='idadeIrmao' label='Idade' value='0' variant='outlined' disabled fullWidth />
-        </Grid>
+        <DateOfBirtheAndAge />
 
         <Grid xs={12} md={6}>
           <FormControl fullWidth>
@@ -164,13 +134,13 @@ export default function Date() {
             <Select
               labelId="demo-simple-select-label"
               id="generoIrmao"
-              value={age}
+              value={genero}
               label="Gênero"
-              onChange={handleChange}
+              onChange={handleGeneroChange}
             >
               {escolaridades.map((escolaridade) => (
-                <MenuItem key={escolaridade.i} value={escolaridade.i}>
-                  {escolaridade.content}
+                <MenuItem key={escolaridade.value} value={escolaridade.value}>
+                  {escolaridade.value}
                 </MenuItem>
               ))}
             </Select>
@@ -182,13 +152,13 @@ export default function Date() {
             <InputLabel>Escolaridade</InputLabel>
             <Select
               id="escolaridadePai"
-              value={age}
+              value={escolaridade}
               label="Escolaridade"
-              onChange={handleChange}
+              onChange={handleEscolaridadeChange}
             >
-              {series.map((serie) => (
-                <MenuItem key={serie.i} value={serie.i}>
-                  {serie.v}
+              {escolaridades.map((escolaridade) => (
+                <MenuItem key={escolaridade.value} value={escolaridade.value}>
+                  {escolaridade.value}
                 </MenuItem>
               ))}
             </Select>
@@ -216,25 +186,34 @@ export default function Date() {
         </Grid>
       </Grid>
 
-
       <Divider sx={{my: '2rem ',}}/>
 
+      <Grid container spacing={2}>
+        <Grid xs={12}>
+          <TextField
+            id="outros-responsaveis"
+            label="Quem são os responsáveis pelo paciente na ausência dos pais?"
+            placeholder="Quem são os responsáveis pelo paciente na ausência dos pais?"
+            fullWidth
+          />
+        </Grid>
+      </Grid>
+
+      <Divider sx={{my: '2rem ',}}/>
 
       <Grid container spacing={2}>
         <Grid xs={12}>
           <TextField
             id="observacoes"
-            label="Observações"
+            label="Observações Gerais"
             fullWidth
             multiline
-            rows={4}
+            rows={3}
           />
         </Grid>
       </Grid>
 
-
       <Divider sx={{my: '2rem ',}}/>
-
 
       <Grid container spacing={2}>
         <Grid xs={6} md={6}>
