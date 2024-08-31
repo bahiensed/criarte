@@ -23,6 +23,12 @@ export const generos = [
   {value: 'Masculino'},
 ]
 
+export const partos = [
+  {value: 'Cesariana'},
+  {value: 'Normal'},
+]
+
+
 export const series = [
   {value: 'Não estuda'},
   {value: 'Pré-escola'},
