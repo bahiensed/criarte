@@ -20,7 +20,7 @@ interface Props {
 }
 
 const drawerWidth = 200;
-const navItems = ['Home', 'About', 'Contact'];
+const navItems = ['Ajuda'];
 
 export default function RootLayout({ children, window }: Props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -104,7 +104,7 @@ export default function RootLayout({ children, window }: Props) {
         <Toolbar />
         <Container maxWidth="lg">
           <Grid container>
-            <Grid  xs={0} sm={3} >
+            <Grid  xs={0} sm={3} sx={{ pr: 2.5 }} >
               <LeftNav />
             </Grid>
 
