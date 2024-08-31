@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Container from '@mui/material/Container';
 
 const inter = Inter({ subsets: ["latin"] });
 
