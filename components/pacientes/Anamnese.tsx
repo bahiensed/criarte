@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Checkbox, Divider, FormControl, FormControlLabel, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
-import { dependencia } from '@/constants';
+import { dependencia, partos } from '@/constants';
 import DateOfBirthAndAge from '../DateOfBirthAndAge'
 
 const Anamnese = () => {
@@ -18,6 +18,11 @@ const Anamnese = () => {
   const [isExtraCurricularChecked, setIsExtracurricularChecked] = useState(false);
   const handleExtraCurricularChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsExtracurricularChecked(event.target.checked);
+  };
+
+  const [parto, setParto] = React.useState('');
+  const handlePartoChange = (event: SelectChangeEvent) => {
+    setParto(event.target.value as string);
   };
 
   const [isReforcoEscolarChecked, setIsReforcoEscolarChecked] = useState(false);
@@ -212,16 +217,30 @@ const Anamnese = () => {
 
 
         <Grid xs={12}>
-            O bebê ao nascer:
+          <FormControl fullWidth>
+            <InputLabel id="tipo-de-parto">Tipo de Parto</InputLabel>
+            <Select
+              id="tipo-de-parto"
+              value={parto}
+              label="Tipo de Parto"
+              onChange={handlePartoChange}
+            >
+              {partos.map((parto) => (
+                <MenuItem key={parto.value} value={parto.value}>
+                  {parto.value}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Grid>
 
         <Grid xs={12} md={6}>
-          <FormControlLabel control={<Checkbox />} label="Necessitou de oxigênio?" /><br />
+          <FormControlLabel control={<Checkbox />} label="Necessitou de oxigênio ao nascer?" /><br />
           <FormControlLabel control={<Checkbox />} label="Teve icterícia?" /><br />
         </Grid>
 
         <Grid xs={12} md={6}>
-          <FormControlLabel control={<Checkbox />} label="Teve convulsão?" /><br />
+          <FormControlLabel control={<Checkbox />} label="Teve convulsão ao nascer?" /><br />
           <FormControlLabel control={<Checkbox />} label="Ficou na incubadora?" />
         </Grid>
 
@@ -237,19 +256,16 @@ const Anamnese = () => {
           <TextField id='Tamanho' label="Peso ao nascer?" fullWidth variant="outlined" />
         </Grid>
 
+        <Grid xs={12}>
+          <TextField
+              id="antecedentes-observacoes"
+              label="Observações Gerais"
+              fullWidth
+              multiline
+              rows={3}
+            />
+        </Grid>
       </Grid>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -662,7 +678,7 @@ const Anamnese = () => {
         <Grid xs={12}>
           <TextField
             id="observacoes-higiene"
-            label="Observações"
+            label="Observações Gerais"
             fullWidth multiline rows={3}
           />
         </Grid>
@@ -1300,7 +1316,6 @@ const Anamnese = () => {
             rows={3}
           />
         </Grid>
-
       </Grid>
 
 
@@ -1446,11 +1461,6 @@ const Anamnese = () => {
             />
         </Grid>
       </Grid>
-
-
-
-
-
     </>
   )
 }
